@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Discord Exporter</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>Discord Exporter</h1>
+  </header>
+
+  <section id="notice" class="notice" hidden>
+    <p id="notice-text"></p>
+    <button id="notice-action" type="button"></button>
+  </section>
+
+  <form id="form" hidden>
+    <label class="field">
+      <span>Server</span>
+      <select id="guild"></select>
+    </label>
+
+    <div class="field">
+      <div class="row">
+        <span>Channels</span>
+        <span class="links">
+          <button type="button" class="link" id="select-all">All</button>
+          <button type="button" class="link" id="select-none">None</button>
+        </span>
+      </div>
+      <input id="filter" type="search" placeholder="Filter channels…" autocomplete="off">
+      <div id="channels" class="channels" role="group" aria-label="Channels"></div>
+      <div id="selected-summary" class="hint"></div>
+    </div>
+
+    <div class="field">
+      <span>Time range</span>
+      <select id="preset">
+        <option value="all">All time</option>
+        <option value="1">Last 24 hours</option>
+        <option value="7">Last 7 days</option>
+        <option value="30">Last 30 days</option>
+        <option value="365">Last year</option>
+        <option value="custom">Custom…</option>
+      </select>
+      <div id="custom-range" class="range" hidden>
+        <label>From <input id="from" type="datetime-local"></label>
+        <label>To <input id="to" type="datetime-local"></label>
+      </div>
+    </div>
+
+    <label class="field">
+      <span>Format</span>
+      <select id="format">
+        <option value="html">HTML (readable page)</option>
+        <option value="txt">Plain text</option>
+        <option value="json">JSON (full data)</option>
+        <option value="csv">CSV (spreadsheet)</option>
+      </select>
+    </label>
+
+    <p id="form-error" class="error" hidden></p>
+    <button id="export" type="submit" class="primary">Export</button>
+  </form>
+
+  <section id="progress" hidden>
+    <p id="progress-title"></p>
+    <div class="bar"><div id="bar-fill"></div></div>
+    <p id="progress-detail" class="hint"></p>
+    <ul id="log" class="log"></ul>
+    <div class="buttons">
+      <button id="cancel" type="button">Cancel</button>
+      <button id="again" type="button" class="primary" hidden>New export</button>
+    </div>
+  </section>
+
+  <script src="popup.js"></script>
+</body>
+</html>

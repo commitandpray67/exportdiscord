@@ -1,0 +1,53 @@
+{
+  "manifest_version": 3,
+  "name": "Discord Exporter",
+  "version": "1.0.0",
+  "description": "Export Discord messages from the channels you choose, for the time range you choose.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://discord.com/*",
+    "https://ptb.discord.com/*",
+    "https://canary.discord.com/*"
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Export Discord messages",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://discord.com/*",
+        "https://ptb.discord.com/*",
+        "https://canary.discord.com/*"
+      ],
+      "js": ["src/page-hook.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://discord.com/*",
+        "https://ptb.discord.com/*",
+        "https://canary.discord.com/*"
+      ],
+      "js": [
+        "src/lib/snowflake.js",
+        "src/lib/zip.js",
+        "src/lib/formatters.js",
+        "src/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}
